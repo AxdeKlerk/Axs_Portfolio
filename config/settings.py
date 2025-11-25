@@ -43,7 +43,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    default=["localhost", "127.0.0.1"]
+    default=["localhost", "127.0.0.1", "axs-portfolio.onrender.com"]
 )
 
 # Application definition

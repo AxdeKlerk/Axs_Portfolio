@@ -13,14 +13,19 @@ services:
     envVars:
       - key: SECRET_KEY
         sync: false
+
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: axs-portfolio-db
+          property: connectionString
+
       - key: CLOUD_NAME
         sync: false
       - key: CLOUD_API_KEY
         sync: false
       - key: CLOUD_API_SECRET
         sync: false
+
       - key: EMAIL_HOST
         sync: false
       - key: EMAIL_PORT
@@ -31,7 +36,14 @@ services:
         sync: false
       - key: EMAIL_HOST_PASSWORD
         sync: false
+
       - key: ALLOWED_HOSTS
         sync: false
       - key: ENVIRONMENT
         sync: false
+
+
+databases:
+  - name: axs-portfolio-db
+    plan: free
+    postgresMajorVersion: 15
