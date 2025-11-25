@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Initialise environment variables
 env = environ.Env()
 
-# Only read .env if the file exists (local dev)
+# Load .env ONLY for local development
 env_file = BASE_DIR / ".env"
-if env_file.exists():
+if env_file.exists() and os.environ.get("RENDER") != "true":
     environ.Env.read_env(env_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
