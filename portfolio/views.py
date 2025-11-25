@@ -1,5 +1,6 @@
 import os
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.staticfiles import finders
 from django.conf import settings
 from .models import About, Blog, Project, CV
 from django.http import FileResponse, Http404
@@ -38,25 +39,17 @@ def cv(request):
 
 
 def download_cv_pdf(request):
-    file_path = os.path.join(settings.BASE_DIR, "static", "cv", "Ax_de_Klerk_-_CV.pdf")
-
-    return FileResponse(
-        open(file_path, "rb"),
-        content_type="application/pdf",
-        as_attachment=True,
-        filename="Ax_de_Klerk_-_CV.pdf"
-    )
+    file_path = finders.find("cv/Ax_de_Klerk_-_CV.pdf")
+    if not file_path:
+        raise Http404("CV not found.")
+    return FileResponse(open(file_path, "rb"), filename="Ax_de_Klerk_-_CV.pdf")
 
 
 def download_cv_doc(request):
-    file_path = os.path.join(settings.BASE_DIR, "static", "cv", "Ax_de_Klerk_-_CV.docx")
-
-    return FileResponse(
-        open(file_path, "rb"),
-        content_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        as_attachment=True,
-        filename="Ax_de_Klerk_-_CV.docx"
-    )
+    file_path = finders.find("cv/Ax_de_Klerk_-_CV.docx")
+    if not file_path:
+        raise Http404("CV not found.")
+    return FileResponse(open(file_path, "rb"), filename="Ax_de_Klerk_-_CV.docx")
 
 
 def contact(request):
