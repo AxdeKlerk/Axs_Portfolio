@@ -10,7 +10,7 @@ services:
 
     startCommand: gunicorn config.wsgi:application
 
-    postDeployCommand: python manage.py migrate 
+    preDeployCommand: python manage.py migrate 
 
     envVars:
       - key: SECRET_KEY
