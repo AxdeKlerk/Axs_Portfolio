@@ -10,7 +10,7 @@ class About(models.Model):
     linkedin_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.name or "About"
 
 
 class Blog(models.Model):
