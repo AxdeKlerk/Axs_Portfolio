@@ -1,5 +1,6 @@
 import traceback
 from django.http import HttpResponse
+from portfolio.views import home as real_home
 
 def probe(request):
     try:
@@ -22,3 +23,12 @@ def homepage_probe(request):
     except Exception as e:
         import traceback
         return HttpResponse("<pre>" + traceback.format_exc() + "</pre>")
+
+def home_debug(request):
+    try:
+        return real_home(request)
+    except Exception:
+        return HttpResponse(
+            "<pre>" + traceback.format_exc() + "</pre>",
+            content_type="text/html"
+        )
