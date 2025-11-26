@@ -562,3 +562,112 @@ When **Django** refuses to load environment variables, and especially when `sett
   
 From now on, I will always ensure that `.env` files are created as UTF-8 (no BOM), contain no blank lines at the top, and are validated using direct imports (`import_module("config.settings")`). This prevents multi-day debugging cascades caused by hidden characters and ensures **Django** loads the intended configuration each time.
 
+## Deployment Error
+
+**Bug:**  
+When I deployed my portfolio site to **Render**, I repeatedly hit a `500` error. The logs always reported:  
+`django.db.utils.OperationalError: no such table: portfolio_about`.
+
+This meant **Django** was trying to query the `portfolio_about` table even though that table DID NOT exist in **Render**’s *PostgreSQL* database. The real problem was that migrations were **never** run on **Render** because the free plan does **not** support `postDeployCommand`, and my `YAML` attempts to run migrations (`postDeployCommand:` and later `preDeployCommand:`) were silently ignored. Because of this, the production database remained empty with no tables created.
+
+I kept redeploying, adjusting the `YAML`, resetting environment variables, force-adding the **SQLite** file, and trying to sync migrations — but none of those attempts worked because **Render** free services simply do not execute migration commands during deploy.
+
+Since I had only ever used **SQLite** locally up to that point, and since **Render** was using **PostgreSQL** in production, the two environments were completely disconnected. Nothing from my local database was ever being copied to **Render**, so the deployed app crashed immediately due to missing tables.
+
+**Fix:**  
+The fix ended up requiring multiple steps done in the correct order:
+
+1. Removed all attempts to use unsupported `postDeployCommand` or `preDeployCommand` in `render.yaml`.  
+   They do not run on the free tier, so migrations were never applied.
+
+2. Updated the `YAML` so that only supported keys were included:
+       `buildCommand:` |
+           `pip install -r requirements.txt`
+           `python manage.py collectstatic --noinput`
+           `python manage.py migrate`
+
+       `startCommand: gunicorn config.wsgi:application`
+
+3. Cleaned up the environment variables on **Render** and ensured every required value existed:
+   - `SECRET_KEY`
+   - `CLOUD_NAME`
+   - `CLOUD_API_KEY`
+   - `CLOUD_API_SECRET`
+   - Email settings
+   - `ALLOWED_HOSTS`
+   - `ENVIRONMENT` (“production”)
+
+4. After migrations ran successfully, the `portfolio_about` table finally existed, and the homepage loaded without the `500` error.
+
+**Lesson Learned:**  
+The **Render** free tier does **not** run migrations automatically. If I use **PostgreSQL** in production, I must run `python manage.py migrate` manually through the `YAML` after each deploy. Relying on local **SQLite** does nothing for the production database, and no tables will ever appear until migrations are manually executed.
+
+---
+
+## SQLite → PostgreSQL Transition Error
+
+**Bug:**  
+My local environment became severely tangled after switching from **SQLite** to **PostgreSQL**. I originally developed entirely on **SQLite**, then attempted to switch to **PostgreSQL**, then deleted the **SQLite** file, then attempted fixture loading, then switched engines again. This resulted in:
+
+- missing tables (`relation "portfolio_about" does not exist`)
+- failed fixture loading attempts  
+- `UnicodeDecodeError` when trying to load `data.json`  
+- database shell errors  
+- wrong database engine being used depending on whether `DATABASE_URL` existed  
+- incorrect environment variable loading logic (**RENDER** flag not existing in my setup)
+
+Because my `settings.py` fell back to **SQLite** whenever `DATABASE_URL` was missing, I often ended up accidentally using **SQLite** when I thought I was using **PostgreSQL**. My fixture (`data.json`) was also encoded as `UTF-16 due` to PowerShell’s default behaviour, which made **Django** unable to read it.
+
+**Fix:**  
+I fixed the local environment by completely resetting the database setup and ensuring that **Django** always used **PostgreSQL** locally.
+
+Steps taken:
+
+1. Deleted all leftover `db.sqlite3` files and backups.
+2. Verified **PostgreSQL** installation and ensured `psql.exe` was callable.
+3. Confirmed **PostgreSQL** was running as a **Windows** service.
+4. Created a clean local Postgres database:
+       `CREATE DATABASE axs_portfolio`;
+
+5. Updated `.env` with explicit Postgres settings:
+       LOCAL_DB_NAME=axs_portfolio
+       LOCAL_DB_USER=postgres
+       LOCAL_DB_PASSWORD=...
+       LOCAL_DB_HOST=localhost
+       LOCAL_DB_PORT=5432
+
+6. Updated `settings.py` so that if `DATABASE_URL` was missing, **Django** used local **PostgreSQL**:
+       `DATABASE_URL = env("DATABASE_URL", default=None)`
+
+       if DATABASE_URL:
+           DATABASES = {
+               "default": dj_database_url.parse(
+                   DATABASE_URL,
+                   conn_max_age=600,
+               )
+           }
+       else:
+           DATABASES = {
+               "default": {
+                   "ENGINE": "django.db.backends.postgresql",
+                   "NAME": env("LOCAL_DB_NAME"),
+                   "USER": env("LOCAL_DB_USER"),
+                   "PASSWORD": env("LOCAL_DB_PASSWORD"),
+                   "HOST": env("LOCAL_DB_HOST"),
+                   "PORT": env("LOCAL_DB_PORT"),
+               }
+           }
+
+7. Ran migrations on the new **PostgreSQL** database:
+       `python manage.py migrate`
+
+8. Regenerated the fixture correctly using `UTF-8`:
+       `python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes --output=data.json`
+
+9. Loaded the fixture into **PostgreSQL**:
+       `python manage.py loaddata data.json`
+
+With that, all tables existed again, all models were in sync, and the local site displayed content correctly.
+
+**Lesson Learned:**  
+Using **SQLite** and **PostgreSQL** interchangeably causes massive conflicts. **Django** will silently fall back to **SQLite** if `DATABASE_URL` is missing, leading to mismatched environments and missing tables. Fixtures must be dumped using `UTF-8` on **Windows**. A stable `.env` and a single database engine prevent almost all of these issues. Note to self: only ever use **PostgreSQL** if I ever plan to deploy a project!
