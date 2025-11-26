@@ -20,7 +20,7 @@ class Blog(models.Model):
     blog_image = CloudinaryField('image', blank=True, null=True)
     content = models.TextField(blank=False, null=False)
     author = models.CharField(max_length=100, default='Ax de Klerk')
-    published_date = models.DateTimeField(auto_now_add=True)
+    published_date = models.DateTimeField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

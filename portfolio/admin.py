@@ -13,7 +13,6 @@ class AboutAdmin(admin.ModelAdmin):
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'published_date')
     fields = ('title', 'summary', 'blog_image', 'content', 'author', 'published_date')
-    readonly_fields = ('published_date',)
 
 
 @admin.register(Project)

@@ -6,32 +6,31 @@ import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# 1. BASE_DIR must come FIRST
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Initialise environment variables
+# 2. Init environment reader
 env = environ.Env()
 
-# Load .env ONLY for local development
-env_file = BASE_DIR / ".env"
-if env_file.exists() and os.environ.get("RENDER") != "true":
-    environ.Env.read_env(env_file)
+# 3. Load .env (ALWAYS locally)
+env_path = BASE_DIR / ".env"
+if env_path.exists():
+    environ.Env.read_env(str(env_path))
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# 4. Secret key
 SECRET_KEY = env("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-ENVIRONMENT = env("ENVIRONMENT", default="production")
+# 5. Debug (controlled by ENVIRONMENT)
+ENVIRONMENT = env("ENVIRONMENT", default="development")
 DEBUG = ENVIRONMENT == "development"
 
-#print(f"Running in {ENVIRONMENT} mode — DEBUG={DEBUG}")
-#print("ENVIRONMENT:", ENVIRONMENT)
-#print("DEBUG:", DEBUG)
-#print("BASE_DIR:", BASE_DIR)
-#print("ENV FILE LOADED:", os.path.exists(BASE_DIR / ".env"))
-#print("INSTALLED_APPS:", INSTALLED_APPS)
+# 6. Allowed hosts
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["localhost", "127.0.0.1"]
+)
 
-
+# Cloudinary config
 cloudinary.config(
     cloud_name=env("CLOUD_NAME"),
     api_key=env("CLOUD_API_KEY"),
@@ -45,10 +44,6 @@ EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
-ALLOWED_HOSTS = env.list(
-    "ALLOWED_HOSTS",
-    default=["localhost", "127.0.0.1", "axs-portfolio.onrender.com"]
-)
 
 # Application definition
 INSTALLED_APPS = [
@@ -95,12 +90,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # Database configuration
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+DATABASE_URL = env("DATABASE_URL", default=None)
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env("LOCAL_DB_NAME"),
+            "USER": env("LOCAL_DB_USER"),
+            "PASSWORD": env("LOCAL_DB_PASSWORD"),
+            "HOST": env("LOCAL_DB_HOST"),
+            "PORT": env("LOCAL_DB_PORT"),
+        }
+    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
