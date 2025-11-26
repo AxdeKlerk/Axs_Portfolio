@@ -20,22 +20,22 @@
                     <h5 class="card-title">{{ project.title|safe }}</h5>
 
                     <!-- DESCRIPTION AREA -->
-                     <div class="description-block mt-3">
+                    <div class="description-block mt-3">
                         <p class="card-text text-justify">{{ project.description|safe }}</p>
-                     </div>
+                    </div>
 
                     <!-- INFO SECTION -->
                     <div class="info-block mt-2 d-flex flex-column justify-content-between">
                         <p class="card-text">
                             <strong>Tools Used:</strong> {{ project.tools_used|safe }}
                         </p>
-                        <p class="card-text text-end">
+                        <p class="card-text text-end align-self-end">
                             <strong>Grade:</strong> {{ project.grade_received|safe }}
                         </p>
                     </div>
 
                     <!-- Button on the bottom of the card -->
-                    <div class="button-stack d-flex flex-column">
+                    <div class="button-stack d-flex flex-column mt-auto">
                         <a href="{{ project.deployed_project_link }}" class="btn btn-cv mb-3" target="_blank">Deployed Project</a>
                         <a href="{{ project.github_link }}" class="btn btn-cv mt-auto" target="_blank">GitHub Repository</a>
                     </div>
