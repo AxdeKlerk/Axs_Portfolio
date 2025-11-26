@@ -13,9 +13,6 @@ __pycache__/
 # OS files
 .DS_Store
 
-# Django files
-db.sqlite3
-
 # VS Code
 .vscode/
 
