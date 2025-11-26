@@ -671,3 +671,55 @@ With that, all tables existed again, all models were in sync, and the local site
 
 **Lesson Learned:**  
 Using **SQLite** and **PostgreSQL** interchangeably causes massive conflicts. **Django** will silently fall back to **SQLite** if `DATABASE_URL` is missing, leading to mismatched environments and missing tables. Fixtures must be dumped using `UTF-8` on **Windows**. A stable `.env` and a single database engine prevent almost all of these issues. Note to self: only ever use **PostgreSQL** if I ever plan to deploy a project!
+
+---
+
+## Fixture Loading Errors (Encoding + Missing Tables)
+
+**Bug:**  
+I ran into two connected problems when trying to migrate my local data into my new **PostgreSQL** setup.  
+First, `python manage.py loaddata data.json` crashed immediately with a `UnicodeDecodeError`:
+
+`'utf-8' codec can't decode byte 0xff in position 0: invalid start byte`
+
+Using `Format-Hex`, I discovered the file started with `FF FE`, which meant `PowerShell` had silently saved the file in `UTF-16 LE` instead of `UTF-8`. **Django** cannot deserialize `UTF-16` fixtures, so it failed before reading anything.
+
+After fixing the encoding, a second error appeared:
+
+`django.db.utils.ProgrammingError: relation "portfolio_about" does not exist`
+
+This happened because I flushed the **PostgreSQL** database before loading the fixture, but the database had **no migrations applied** yet. The fixture attempted to update rows in tables that didn’t exist. **SQLite** had hidden this mistake earlier because the tables already existed locally. **PostgreSQL** correctly refused because there was no schema.
+
+**Fix:**  
+I resolved both issues step-by-step:
+
+1. **Recreated the fixture in proper UTF-8**:
+
+        python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes --output=data.json
+
+2. **Verified the encoding** with `Format-Hex` to ensure there was no `UTF-16 BOM`.
+
+3. **Reset PostgreSQL correctly**:
+   - Dropped or flushed the database.
+   - Re-ran migrations cleanly:
+
+        `python manage.py migrate`
+
+   This rebuilt all tables (`portfolio_about`, `portfolio_project`, `portfolio_blog`, etc.).
+
+4. **Loaded the fixture only after the schema existed**:
+
+        `python manage.py loaddata data.json`
+
+After that, **Django** reported the expected:
+
+`Installed 1 object(s) from 1 fixture(s)`
+
+and my local content finally loaded into **PostgreSQL**.
+
+**Lesson Learned:**  
+Two separate issues combined to cause the failure.  
+- `PowerShell` silently saves files in `UTF-16`, so **Django** fixtures must be created with `python -Xutf8` or they won’t load.  
+- Fixtures can only be loaded into a database **after migrations create the schema**. A flushed or new database must always be migrated first. 
+  
+Understanding both problems saved a huge amount of time and prevented bad assumptions about why data wasn’t appearing. Although, this did take a few days of research to get this right.
