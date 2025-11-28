@@ -25,19 +25,24 @@
                     </div>
 
                     <!-- INFO SECTION -->
-                    <div class="info-block mt-2 d-flex flex-column justify-content-between">
-                        <p class="card-text">
-                            <strong>Tools Used:</strong> {{ project.tools_used|safe }}
-                        </p>
-                        <p class="card-text text-end align-self-end">
-                            <strong>Grade:</strong> {{ project.grade_received|safe }}
-                        </p>
+                    <div class="mt-auto">
+                        <div class="tools-used">
+                            <p class="card-text mb-1">
+                                <strong>Tools Used:</strong> {{ project.tools_used|safe }}
+                            </p>
+                        </div>
+
+                        <div class="grade text-end">
+                            <p class="card-text mb-0">
+                                <strong>Grade:</strong> {{ project.grade_received|safe }}
+                            </p>
+                        </div>
                     </div>
 
                     <!-- Button on the bottom of the card -->
-                    <div class="button-stack d-flex flex-column mt-auto">
-                        <a href="{{ project.deployed_project_link }}" class="btn btn-cv mb-3" target="_blank">Deployed Project</a>
-                        <a href="{{ project.github_link }}" class="btn btn-cv mt-auto" target="_blank">GitHub Repository</a>
+                    <div class="button-stack d-flex flex-column mt-1">
+                        <a href="{{ project.deployed_project_link }}" class="btn btn-cv mb-1" target="_blank">Deployed Project</a>
+                        <a href="{{ project.github_link }}" class="btn btn-cv" target="_blank">GitHub Repository</a>
                     </div>
                 </div>
             </div>

@@ -203,7 +203,10 @@ main {
     min-height: 260px; /* adjust until perfect */
 }
 .info-block {
-    min-height: 95px; /* adjust until Grade aligns across all cards */
+    min-height: 75px; /* adjust until Grade aligns across all cards */
+}
+.tools-used {
+    min-height: 48px;
 }
 
 /* Blog page */
