@@ -723,3 +723,22 @@ Two separate issues combined to cause the failure.
 - Fixtures can only be loaded into a database **after migrations create the schema**. A flushed or new database must always be migrated first. 
   
 Understanding both problems saved a huge amount of time and prevented bad assumptions about why data wasn’t appearing. Although, this did take a few days of research to get this right.
+
+---
+
+## DNS Configuration Error
+
+**Bug:**  
+I discovered that my apex domain (`axdeklerk.co.uk`) kept failing with SSL handshake errors and 400 responses, while the `www` version loaded normally. At first it looked like an SSL or **Cloudflare** issue, but the real problem was a chain of misconfigurations: the apex domain was not added to **Heroku**, **Cloudflare** was flattening the apex CNAME incorrectly because I still had an MX record I didn’t need, and **Django** was rejecting the apex domain because the `ALLOWED_HOSTS` value in my **Heroku** config vars did not include it. This meant the request never reached **Django** at first, and once it finally did, **Django** rejected it.
+
+**Fix:**  
+I fixed the issue step-by-step.  
+1. I added `axdeklerk.co.uk` as a domain inside **Heroku** so it could generate the correct DNS target.  
+2. I updated the **Cloudflare** CNAME for the apex domain to point to the new **Heroku** DNS target.  
+3. I deleted the unused *MX record*, which allowed **Cloudflare** to properly flatten the CNAME at the apex.  
+4. I updated the `ALLOWED_HOSTS` value in my **Heroku** config vars to include `axdeklerk.co.uk`, `www.axdeklerk.co.uk`, and `.axdeklerk.co.uk`.  
+5. I re-enabled **Cloudflare**’s HTTPS settings once the SSL certificate for the apex domain was fully provisioned.  
+6. I added a **Cloudflare** page rule so all `www` traffic permanently redirects to the apex domain, which is my chosen canonical version.
+
+**Lesson Learned:**  
+When the apex domain fails but the `www` version works, the problem is normally caused by DNS or SSL configuration, not code. **Heroku** must have both domains added, **Cloudflare** must be allowed to flatten the apex CNAME, and **Django** must include both domains in `ALLOWED_HOSTS`. The correct workflow is always: fix DNS → verify SSL → update **Django** settings via config vars. This avoids chasing the wrong issue.
