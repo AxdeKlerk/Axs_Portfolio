@@ -27,7 +27,7 @@ DEBUG = ENVIRONMENT == "development"
 # 6. Allowed hosts
 ALLOWED_HOSTS = env.list(
     "ALLOWED_HOSTS",
-    default=["localhost", "127.0.0.1"]
+    default=["localhost", "127.0.0.1", "axdeklerk.co.uk", "www.axdeklerk.co.uk", ".axdeklerk.co.uk"]
 )
 
 # Cloudinary config
