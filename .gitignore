@@ -25,5 +25,5 @@ node_modules/
 # Media uploads
 media/
 
-# Fixture exports
-*.json
+#Static files
+staticfiles/

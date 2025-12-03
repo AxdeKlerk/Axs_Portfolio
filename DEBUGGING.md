@@ -742,3 +742,58 @@ I fixed the issue step-by-step.
 
 **Lesson Learned:**  
 When the apex domain fails but the `www` version works, the problem is normally caused by DNS or SSL configuration, not code. **Heroku** must have both domains added, **Cloudflare** must be allowed to flatten the apex CNAME, and **Django** must include both domains in `ALLOWED_HOSTS`. The correct workflow is always: fix DNS → verify SSL → update **Django** settings via config vars. This avoids chasing the wrong issue.
+
+---
+
+### Runtime Error
+
+**Bug:**  
+My **Django** site deployed on **Heroku** was returning 404 errors for every icon file and for `/static/manifest.json`, even though all other static files (CSS, images, etc.) were loading correctly. I confirmed that static settings were correct, **Whitenoise** was configured properly, `collectstatic` ran successfully, and all icon files worked locally. Only the manifest and favicon-related assets were missing on the live site — everything else under `/static/` returned 200.
+
+This created a confusing situation where:
+
+- `/static/images/...` → 200  
+- `/static/css/...` → 200  
+- `/static/icons/...` → 404  
+- `/static/manifest.json` → 404  
+
+Even manual `heroku run "python manage.py collectstatic --noinput"` didn’t fix it. The files simply never appeared in the slug.
+
+**Fix:**  
+The root cause turned out to be a `.gitignore` rule I had completely forgotten about:
+
+    *.json
+
+This rule ignored **every** `.json` file in the entire repository, including the critical:
+
+    static/manifest.json
+
+Because it was ignored:
+
+- **Git** never tracked it  
+- **Heroku** never received it  
+- `collectstatic` never collected it  
+- **Whitenoise** never served it  
+- Result: `/static/manifest.json` → 404 forever  
+
+To fix the issue:
+
+1. I edited `.gitignore` and removed or replaced the generic rule:
+
+        *.json
+
+2. I then force-added the manifest because Git still treated it as ignored:
+
+        git add -f static/manifest.json
+        git commit -m "Track manifest.json correctly"
+        git push
+
+3. After deployment, **Heroku** ran `collectstatic --noinput` again and the manifest finally appeared in:
+
+        /static/manifest.json
+
+All favicon links, PWA links, and icon references worked instantly.
+
+**Lesson Learned:**  
+Never use blanket patterns like `*.json` in `.gitignore`. They silently prevent critical project files from being tracked, especially when working with **Django** static assets, PWA manifests, configuration files, and front-end build outputs. If a `JSON` file is missing on **Heroku**, check `.gitignore` before checking your static pipeline. This bug looked like a staticfiles problem, but the real cause was Git refusing to track a required file.
+
