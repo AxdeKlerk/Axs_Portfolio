@@ -11,13 +11,40 @@
 {% endblock %}
 
 {% block social_meta %}
-    <meta property="og:title" content=" | Blog | Ax’s Portfolio">
-    <meta property="og:description" content="Browse a curated selection of web development and design projects created by Ax de Klerk using Django, Python, HTML, CSS, Cloudinary, and modern responsive techniques.">
+    <meta property="og:title" content="{{ post.title }} | Blog | Ax’s Portfolio">
+    <meta property="og:description" content="{{ post.excerpt|truncatewords:25 }}">
     <meta property="og:image" content="https://res.cloudinary.com/dqde3a83z/image/upload/c_pad,b_black,w_1200,h_627/htlugudmyl2gysmeyi8j.jpg">
-    <meta property="og:url" content="https://axdeklerk.co.uk/blog_detail/">
-    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://axdeklerk.co.uk{{ request.path }}">
+    <meta property="og:type" content="article">
 {% endblock %}
 
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ post.title|escapejs }}",
+  "description": "{{ post.excerpt|truncatewords:25|escapejs }}",
+  "url": "https://axdeklerk.co.uk{{ request.path }}",
+  "image": [
+    "https://res.cloudinary.com/dqde3a83z/image/upload/c_pad,b_black,w_1200,h_627/htlugudmyl2gysmeyi8j.jpg"
+  ],
+  "datePublished": "{{ post.created|date:'c' }}",
+  "dateModified": "{{ post.updated|date:'c' }}",
+  "author": {
+    "@type": "Person",
+    "name": "Ax de Klerk",
+    "url": "https://axdeklerk.co.uk/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ax de Klerk",
+    "url": "https://axdeklerk.co.uk/"
+  }
+}
+</script>
+{% endblock %}
 
 {% block body_class %}standard-page{% endblock %}
 
