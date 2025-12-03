@@ -88,3 +88,37 @@ I checked that every page in my portfolio correctly outputs a `<link rel="canoni
 
 **Notes:**  
 I learned that duplicate URLs often occur automatically due to browser behaviour, social media link parameters, trailing slashes, HTTP/HTTPS variations, and user input. Adding a dynamic canonical tag ensures that Google always sees a single authoritative URL for each page, which prevents SEO dilution and improves the professional quality of the site. The test confirmed that the implementation works exactly as intended.
+
+---
+
+#### 9.5.3 Static Manifest & Favicon Pipeline
+
+**User Story:**  
+As a **site owner**, I want **my site’s favicon, * icon, and manifest file to load correctly in production** so that **my portfolio feels polished, professional, and behaves correctly across browsers and devices**.
+
+**What Was Tested:**  
+I tested whether all static icon assets (*, ICO, *) and the `manifest.json` file were being correctly collected, deployed, and served in production on **Heroku**. This testing ensured that all branding files existed in the deployed `/static/` directory and were accessible to users. 
+
+**Acceptance Criteria:**  
+[x] All icons load from `/static/icons/`  
+[x] `favicon.ico` loads in the browser tab  
+[x] * icon loads at `/static/icons/ax_icon.*`  
+[x] `manifest.json` loads from `/static/manifest.json`  
+[x] **Django** collects all static files during deployment  
+[x] **Heroku** deploy includes the manifest file  
+[x] No 404s for favicon, * icons, or manifest  
+[x] `.gitignore` no longer blocks required files  
+
+**Tasks Completed:**  
+[x] Verified all static settings in **Django**  
+[x] Confirmed **Whitenoise** was active and correctly ordered  
+[x] Checked `/static/` behaviour directly in logs  
+[x] Investigated why only JSON-based files were missing  
+[x] Located the `.gitignore` rule causing the issue (`*.json`)  
+[x] Removed the rule   
+[x] Force-added `manifest.json` to *Git* using `git add -f`  
+[x] Redeployed to **Heroku** and let collectstatic rebuild  
+[x] Retested all icon and manifest routes successfully  
+
+**Notes:**  
+This issue turned out to be caused by a blanket `.gitignore` rule that ignored **every** `.json` file in the project, including the critical `manifest.json` used by browsers and *PWAs*. Although all *PNG*, *ICO*, *SVG*, and *CSS* files deployed correctly, the manifest was never tracked by *Git* and therefore never included in **Heroku**’s slug. Once I corrected the `.gitignore` entry and force-added the manifest file, `collectstatic` picked it up and the file appeared correctly under `/static/`. This was a good reminder that *Git* ignore rules can silently break production even when the **Django** static pipeline is working perfectly.
