@@ -2,6 +2,14 @@
 {% load static %}
 {% load cloudinary %}
 
+{# Dynamic Title #}
+{% block title %}Blog | Ax’s Portfolio{% endblock %}
+
+{# Dynamic Description #}
+{% block meta_description %}
+    <meta name="description" content="Explore articles, thoughts, and technical deep dives by Ax de Klerk covering web development, SEO, design, and personal projects.">
+{% endblock %}
+
 {% block body_class %}standard-page{% endblock %}
 
 {% block content %}

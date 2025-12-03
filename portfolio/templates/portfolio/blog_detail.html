@@ -2,6 +2,14 @@
 {% load static %}
 {% load cloudinary %}
 
+{# Dynamic Title #}
+{% block title %}{{ post.title }} | Blog | Ax’s Portfolio{% endblock %}
+
+{# Dynamic Description #}
+{% block meta_description %}
+    <meta name="description" content="{{ post.excerpt|truncatewords:25 }}">
+{% endblock %}
+
 {% block body_class %}standard-page{% endblock %}
 
 {% block content %}

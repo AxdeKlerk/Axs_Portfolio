@@ -2,6 +2,14 @@
 {% load static %}
 {% load cloudinary %}
 
+{# Dynamic Title #}
+{% block title %}CV | Ax’s Portfolio{% endblock %}
+
+{# Dynamic Description #}
+{% block meta_description %}
+    <meta name="description" content="View and download the CV of Ax de Klerk, a web developer and designer specializing in creating clean, functional digital experiences.">
+{% endblock %}
+
 {% block body_class %}standard-page{% endblock %}
 
 {% block content %}
