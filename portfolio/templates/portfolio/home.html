@@ -17,6 +17,22 @@
     <meta property="og:type" content="website">
 {% endblock %}
 
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "WebPage",
+  "name": "Home | Ax’s Portfolio",
+  "url": "https://axdeklerk.co.uk/",
+  "author": {
+    "@type": "Person",
+    "name": "Ax de Klerk",
+    "url": "https://axdeklerk.co.uk/"
+  }
+}
+</script>
+{% endblock %}
+
 {% block body_class %}home-page{% endblock %}
 
 {% block hero_content %}
