@@ -25,22 +25,28 @@
     {% block structured_data %}{% endblock %}
 
     <!-- AX ICON SET -->
+    <link rel="icon" href="{% static 'icons/ax_icon.svg' %}" type="image/svg+xml">
+
+    <!-- Favicon fallback -->
     <link rel="icon" type="image/x-icon" href="{% static 'icons/favicon.ico' %}">
+
+    <!-- Standard PNG favicons -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'icons/ax_icon_16.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icons/ax_icon_32.png' %}">
-    <link rel="icon" type="image/png" sizes="256x256" href="{% static 'icons/ax_icon_256.png' %}">
 
-    <!-- Apple Touch Icon -->
+    <!-- High-resolution PNG icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'icons/ax_icon_256.png' %}">
+    <link rel="icon" type="image/png" sizes="256x256" href="{% static 'icons/ax_icon_256.png' %}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'icons/ax_icon_512.png' %}">
+
+    <!-- Apple Touch Icon (iOS PWA / Home Screen) -->
     <link rel="apple-touch-icon" href="{% static 'icons/ax_icon_1024.png' %}">
 
-    <!-- Android / PWA Icons -->
-    <link rel="manifest" href="{% static 'manifest.json' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'icons/ax_icon_512.png' %}">
-    <link rel="icon" type="image/png" sizes="512x512" href="{% static 'icons/ax_icon_1024.png' %}">
+    <!-- Pinned tab icon for Safari (optional but clean) -->
+    <link rel="mask-icon" href="{% static 'icons/ax_icon.svg' %}" color="#000000">
 
-    <!-- SVG Fallback -->
-    <link rel="icon" type="image/svg+xml" href="{% static 'icons/ax_icon.svg' %}">
-
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="{% static 'assets/manifest.json' %}">
 
     <!-- Bootstrap and CSS links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -59,7 +65,7 @@
 
                 <!-- AX Logo -->
                 <a href="{% url 'portfolio:home' %}" class="ax-brand-logo">
-                    <img src="{% static 'icons/ax_icon.svg' %}" alt="AX Logo" class="ax-logo-img">
+                    <img src="{% static 'icons/ax_icon.png' %}" alt="AX Logo" class="ax-logo-img">
                 </a>
 
                 <div class="navbar-center d-flex justify-content-center flex-grow-1">

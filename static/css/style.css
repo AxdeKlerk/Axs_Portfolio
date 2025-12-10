@@ -72,7 +72,7 @@ main {
 }
 .navbar .container-fluid {
     display: flex;
-    justify-content: space-between; /* distributes left, center, right */
+    justify-content: space-between;
     align-items: center;
 }
 .navbar-icons {
@@ -82,8 +82,8 @@ main {
 .ax-brand-logo {
     display: flex;
     align-items: center;
-    margin-right: auto;   /* pushes the logo to the far left */
-    padding-top: 0.5rem;  /* adjust to match vertical position */
+    margin-right: auto;
+    padding-top: 0.5rem;
 }
 .ax-logo-img {
     height: 60px;
@@ -301,8 +301,8 @@ main {
 /* On small screens */
 @media (max-width: 768px) {
     .navbar-icons {
-        gap: 3rem;
-        padding-top: 2.5rem;
+        gap: 1.5rem;
+        padding-top: 1.5rem;
     }
     .nav-img {
         height: 2rem;
