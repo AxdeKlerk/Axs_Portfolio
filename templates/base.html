@@ -55,23 +55,31 @@
 <body class="{% block body_class %}{% endblock %}">
     <div class="site-frame">
         <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid justify-content-evenly">
-                <div class="navbar-icons d-flex flex-wrap justify-content-center">
-                    <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">
-                        <img src="{% static 'images/dymo-home.jpg' %}" alt="Home label" class="nav-img">
-                    </a>
-                    <a href="{% url 'portfolio:about' %}" class="icon-link {% if page == 'about' %}active{% endif %}">
-                        <img src="{% static 'images/dymo-about.jpg' %}" alt="About label" class="nav-img">
-                    </a>
-                    <a href="{% url 'portfolio:cv' %}" class="icon-link {% if page == 'cv' %}active{% endif %}">
-                        <img src="{% static 'images/dymo-cv.jpg' %}" alt="CV label" class="nav-img">
-                    </a>                   
-                    <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
-                        <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
-                    </a>
-                    <a href="{% url 'portfolio:blog' %}" class="icon-link {% if page == 'blog' %}active{% endif %}">
-                        <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
-                    </a>
+            <div class="container-fluid">
+
+                <!-- AX Logo -->
+                <a href="{% url 'portfolio:home' %}" class="ax-brand-logo">
+                    <img src="{% static 'icons/ax_icon.svg' %}" alt="AX Logo" class="ax-logo-img">
+                </a>
+
+                <div class="navbar-center d-flex justify-content-center flex-grow-1">
+                    <div class="navbar-icons d-flex flex-wrap justify-content-center">
+                        <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">
+                            <img src="{% static 'images/dymo-home.jpg' %}" alt="Home label" class="nav-img">
+                        </a>
+                        <a href="{% url 'portfolio:about' %}" class="icon-link {% if page == 'about' %}active{% endif %}">
+                            <img src="{% static 'images/dymo-about.jpg' %}" alt="About label" class="nav-img">
+                        </a>
+                        <a href="{% url 'portfolio:cv' %}" class="icon-link {% if page == 'cv' %}active{% endif %}">
+                            <img src="{% static 'images/dymo-cv.jpg' %}" alt="CV label" class="nav-img">
+                        </a>                   
+                        <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
+                            <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
+                        </a>
+                        <a href="{% url 'portfolio:blog' %}" class="icon-link {% if page == 'blog' %}active{% endif %}">
+                            <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -70,9 +70,25 @@ main {
     background: transparent !important;
     padding: 1rem 0;
 }
+.navbar .container-fluid {
+    display: flex;
+    justify-content: space-between; /* distributes left, center, right */
+    align-items: center;
+}
 .navbar-icons {
     gap: 2rem;
     padding-top: 1rem;
+}
+.ax-brand-logo {
+    display: flex;
+    align-items: center;
+    margin-right: auto;   /* pushes the logo to the far left */
+    padding-top: 0.5rem;  /* adjust to match vertical position */
+}
+.ax-logo-img {
+    height: 60px;
+    width: auto;
+    display: block;
 }
 .nav-img {
     height: 30px;
