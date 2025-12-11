@@ -71,17 +71,16 @@ main {
     padding: 1rem 0;
 }
 .navbar .container-fluid {
-    display: flex;
+    padding: 0 1rem;
     justify-content: space-between;
-    align-items: center;
 }
 .navbar-icons {
     gap: 2rem;
-    padding-top: 1rem;
+    padding-left: 1rem;
 }
 .ax-brand-logo {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     margin-right: auto;
     padding-top: 0.5rem;
 }
@@ -118,9 +117,9 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1 0 30%; /* allows wrapping on small screens */
+    /*flex: 1 0 30%;  allows wrapping on small screens */
     text-decoration: none;
-    flex: 0 0 auto; /* prevents wrapping */
+    flex: 0 0 auto; /*prevents wrapping */
 }
 
 /* Home page */
@@ -301,22 +300,31 @@ main {
 /* On small screens */
 @media (max-width: 768px) {
     .navbar-icons {
+        flex-wrap: wrap;
+        justify-content: center;
         gap: 1.5rem;
-        padding-top: 1.5rem;
+        padding-top: 4rem;
     }
     .nav-img {
-        height: 2rem;
+        height: 1.8rem;
     }
+
 }
 
 /* On medium screens */
 @media (min-width: 768px) {
     .navbar-icons {
-        gap: 3.1rem;
-        padding-top: 2.8rem;
+        flex-wrap: nowrap;
+        /*gap: 3.1rem;*/
+        justify-content: center;
+        padding-top: 0;
     }
     .nav-img {
-        height: 2rem;
+        height: 2.5rem;
+    }
+    .icon-cols {
+        flex: 0 0 auto !important; /* prevents wrapping */
+        align-items: center;
     }
 }
 
@@ -324,19 +332,17 @@ main {
 @media (min-width: 1024px) {
     .navbar-icons {
         gap: 4rem;
-        padding-top: 3rem;
     }
     .nav-img {
-        height: 2.1rem;
+        height: 2.7rem;
     }
 }
 /* On extra large screens and above */
 @media (min-width: 1440px) {
     .navbar-icons {
         gap: 4.5rem;
-        padding-top: 3.2rem;
     }
     .nav-img {
-        height: 2.2rem;
+        height: 3rem;
     }
 }

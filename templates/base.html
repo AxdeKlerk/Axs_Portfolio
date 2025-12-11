@@ -62,29 +62,35 @@
     <div class="site-frame">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
+                <div class="row d-flex align-items-center w-100">
+                    
+                    <!-- AX Logo -->
+                    <div class="col-2 align-items-start">
+                        <a href="{% url 'portfolio:home' %}" class="ax-brand-logo">
+                            <img src="{% static 'icons/ax_icon.png' %}" alt="AX Logo" class="ax-logo-img">
+                        </a>
+                    </div>
 
-                <!-- AX Logo -->
-                <a href="{% url 'portfolio:home' %}" class="ax-brand-logo">
-                    <img src="{% static 'icons/ax_icon.png' %}" alt="AX Logo" class="ax-logo-img">
-                </a>
-
-                <div class="navbar-center d-flex justify-content-center flex-grow-1">
-                    <div class="navbar-icons d-flex flex-wrap justify-content-center">
-                        <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">
-                            <img src="{% static 'images/dymo-home.jpg' %}" alt="Home label" class="nav-img">
-                        </a>
-                        <a href="{% url 'portfolio:about' %}" class="icon-link {% if page == 'about' %}active{% endif %}">
-                            <img src="{% static 'images/dymo-about.jpg' %}" alt="About label" class="nav-img">
-                        </a>
-                        <a href="{% url 'portfolio:cv' %}" class="icon-link {% if page == 'cv' %}active{% endif %}">
-                            <img src="{% static 'images/dymo-cv.jpg' %}" alt="CV label" class="nav-img">
-                        </a>                   
-                        <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
-                            <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
-                        </a>
-                        <a href="{% url 'portfolio:blog' %}" class="icon-link {% if page == 'blog' %}active{% endif %}">
-                            <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
-                        </a>
+                    <!-- Nav Icons -->
+                    <div class="col d-flex justify-content-center">
+                        <!--<div class="navbar-center d-flex justify-content-center flex-grow-1">-->
+                        <div class="navbar-icons d-flex flex-wrap align-items-center justify-content-evenly">
+                            <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-home.jpg' %}" alt="Home label" class="nav-img">
+                            </a>
+                            <a href="{% url 'portfolio:about' %}" class="icon-link {% if page == 'about' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-about.jpg' %}" alt="About label" class="nav-img">
+                            </a>
+                            <a href="{% url 'portfolio:cv' %}" class="icon-link {% if page == 'cv' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-cv.jpg' %}" alt="CV label" class="nav-img">
+                            </a>                   
+                            <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
+                            </a>
+                            <a href="{% url 'portfolio:blog' %}" class="icon-link {% if page == 'blog' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
