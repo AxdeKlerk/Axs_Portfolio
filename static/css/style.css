@@ -72,17 +72,19 @@ main {
 }
 .navbar .container-fluid {
     padding: 0 1rem;
-    justify-content: space-between;
+}
+.navbar .row {
+    align-items: flex-start !important;
 }
 .navbar-icons {
-    gap: 2rem;
+    display: flex;
+    gap: 1rem;
     padding-left: 1rem;
 }
 .ax-brand-logo {
     display: flex;
     /*align-items: center;*/
-    margin-right: auto;
-    padding-top: 0.5rem;
+    /*margin-right: auto;*/
 }
 .ax-logo-img {
     height: 60px;
@@ -113,6 +115,10 @@ main {
 .nav-img:hover {
     transform: rotate(0deg) scale(1.1) !important;
 }
+.icons-col {
+    display: flex;
+    justify-content: center;
+}
 .icon-link {
     display: flex;
     justify-content: center;
@@ -120,6 +126,9 @@ main {
     /*flex: 1 0 30%;  allows wrapping on small screens */
     text-decoration: none;
     flex: 0 0 auto; /*prevents wrapping */
+}
+.blog-icon {
+    margin-right: 1rem;
 }
 
 /* Home page */
@@ -299,32 +308,41 @@ main {
 
 /* On small screens */
 @media (max-width: 768px) {
+    .ax-logo-img {
+        height: 45px;
+    }
     .navbar-icons {
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-        padding-top: 4rem;
+        justify-content: space-between;
+        width: 100%;
     }
     .nav-img {
         height: 1.8rem;
     }
-
+    .icons-col {
+        flex-grow: 1 !important;
+        width: 100%;
+    }
 }
 
-/* On medium screens */
+/* On medium to larger screens */
 @media (min-width: 768px) {
     .navbar-icons {
+        width: auto;
         flex-wrap: nowrap;
-        /*gap: 3.1rem;*/
+        gap: 3rem;
         justify-content: center;
-        padding-top: 0;
+        align-items: center;
+        padding-top: 1rem;
     }
     .nav-img {
-        height: 2.5rem;
+        /*height: 2rem;*/
     }
-    .icon-cols {
-        flex: 0 0 auto !important; /* prevents wrapping */
-        align-items: center;
+    .icons-col {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1 !important; /* prevents wrapping */
+        /*align-items: center;*/
     }
 }
 
@@ -334,7 +352,7 @@ main {
         gap: 4rem;
     }
     .nav-img {
-        height: 2.7rem;
+        height: 2.1rem;
     }
 }
 /* On extra large screens and above */
@@ -343,6 +361,6 @@ main {
         gap: 4.5rem;
     }
     .nav-img {
-        height: 3rem;
+        height: 2.2rem;
     }
 }

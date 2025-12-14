@@ -62,19 +62,20 @@
     <div class="site-frame">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
-                <div class="row d-flex align-items-center w-100">
-                    
-                    <!-- AX Logo -->
-                    <div class="col-2 align-items-start">
+
+                <div class="row align-items-center w-100">
+
+                    <!-- Logo column -->
+                    <div class="col-2 col-md-1 d-flex align-items-center">
                         <a href="{% url 'portfolio:home' %}" class="ax-brand-logo">
                             <img src="{% static 'icons/ax_icon.png' %}" alt="AX Logo" class="ax-logo-img">
                         </a>
                     </div>
 
-                    <!-- Nav Icons -->
-                    <div class="col d-flex justify-content-center">
-                        <!--<div class="navbar-center d-flex justify-content-center flex-grow-1">-->
-                        <div class="navbar-icons d-flex flex-wrap align-items-center justify-content-evenly">
+                    <!-- Icons column -->
+                    <div class="col icons-col d-flex justify-content-start">
+                        <div class="navbar-icons d-flex flex-wrap">
+                            
                             <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-home.jpg' %}" alt="Home label" class="nav-img">
                             </a>
@@ -83,11 +84,11 @@
                             </a>
                             <a href="{% url 'portfolio:cv' %}" class="icon-link {% if page == 'cv' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-cv.jpg' %}" alt="CV label" class="nav-img">
-                            </a>                   
+                            </a>
                             <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
                             </a>
-                            <a href="{% url 'portfolio:blog' %}" class="icon-link {% if page == 'blog' %}active{% endif %}">
+                            <a href="{% url 'portfolio:blog' %}" class="icon-link blog-icon {% if page == 'blog' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
                             </a>
                         </div>
@@ -95,6 +96,7 @@
                 </div>
             </div>
         </nav>
+
 
         <!-- One global hero section -->
         <div class="hero-section">
