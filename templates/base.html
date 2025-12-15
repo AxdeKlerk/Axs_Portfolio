@@ -63,7 +63,7 @@
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
 
-                <div class="row align-items-center w-100">
+                <div class="row d-flex align-items-center w-100">
 
                     <!-- Logo column -->
                     <div class="col-2 col-md-1 d-flex align-items-center">
@@ -73,7 +73,7 @@
                     </div>
 
                     <!-- Icons column -->
-                    <div class="col icons-col d-flex justify-content-start">
+                    <div class="col icons-col d-flex justify-content-start flex-grow-1">
                         <div class="navbar-icons d-flex flex-wrap">
                             
                             <a href="{% url 'portfolio:home' %}" class="icon-link {% if page == 'home' %}active{% endif %}">

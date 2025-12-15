@@ -7,11 +7,9 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
-    /*box-sizing: border-box;*/
     font-family: 'Geist Mono', monospace;
     color: #000000;
     font-size: 14px;
-    /*font-weight: 200;*/
 }
 main {
     flex: 1 0 auto;
@@ -92,7 +90,6 @@ main {
     display: block;
 }
 .nav-img {
-    height: 30px;
     width: auto;
     transition: transform 0.3s ease;
     transform-origin: center center;
@@ -123,7 +120,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*flex: 1 0 30%;  allows wrapping on small screens */
     text-decoration: none;
     flex: 0 0 auto; /*prevents wrapping */
 }
@@ -224,10 +220,10 @@ main {
     margin-bottom: 10px;
 }
 .description-block {
-    min-height: 260px; /* adjust until perfect */
+    min-height: 260px; 
 }
 .info-block {
-    min-height: 75px; /* adjust until Grade aligns across all cards */
+    min-height: 75px;
 }
 .tools-used {
     min-height: 48px;
@@ -277,10 +273,6 @@ main {
 .blog-text {
     color: #000000;
 }
-
-
-/*Contact page */
-
 
 /* Footer */
 .footer-contact {
@@ -335,24 +327,20 @@ main {
         align-items: center;
         padding-top: 1rem;
     }
-    .nav-img {
-        /*height: 2rem;*/
-    }
     .icons-col {
         display: flex;
         justify-content: center;
         flex-grow: 1 !important; /* prevents wrapping */
-        /*align-items: center;*/
     }
 }
 
-/* On larger screens and above: make them one line */
+/* On larger screens */
 @media (min-width: 1024px) {
     .navbar-icons {
         gap: 4rem;
     }
     .nav-img {
-        height: 2.1rem;
+        height: 2.4rem;
     }
 }
 /* On extra large screens and above */
@@ -361,6 +349,6 @@ main {
         gap: 4.5rem;
     }
     .nav-img {
-        height: 2.2rem;
+        height: 2.8rem;
     }
 }
