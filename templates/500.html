@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{# Dynamic Title #}
+{% block title %}500 | Ax’s Portfolio{% endblock %}
+
+{# Meta Description #}
+{% block meta_description %}
+<meta name="description" content="Something went wrong on our side. Please try again or return to Ax de Klerk’s portfolio homepage.">
+{% endblock %}
+
+{% block social_meta %}
+<meta property="og:title" content="500 | Ax’s Portfolio">
+<meta property="og:description" content="An unexpected server error occurred. Please return to the homepage.">
+<meta property="og:image" content="https://res.cloudinary.com/dqde3a83z/image/upload/c_pad,b_black,w_1200,h_627/htlugudmyl2gysmeyi8j.jpg">
+<meta property="og:url" content="https://axdeklerk.co.uk/500/">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "500 | Ax’s Portfolio",
+  "url": "https://axdeklerk.co.uk/500/"
+}
+</script>
+{% endblock %}
+
+{% block body_class %}standard-page{% endblock %}
+
+{% block content %}
+<h1 class="text-center">500 — Server Error</h1>
+<p class="text-center">Something went wrong on our side. It’s not you.</p>
+<p class="text-center">Please get in contact so that I can fix the error.</p>
+{% endblock %}
