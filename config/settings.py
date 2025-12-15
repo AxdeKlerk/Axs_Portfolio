@@ -2,8 +2,6 @@ from pathlib import Path
 import os
 import environ
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 import dj_database_url
 
 # 1. BASE_DIR must come FIRST

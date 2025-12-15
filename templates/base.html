@@ -53,17 +53,20 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {% block canonical_url %}
+    {% if request %}
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    {% endif %}
     {% endblock %}
 
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
     <div class="site-frame">
+
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid">
 
-                <div class="row d-flex align-items-center w-100">
+                <div class="row align-items-start w-100">
 
                     <!-- Logo column -->
                     <div class="col-2 col-md-1 d-flex align-items-center">
@@ -97,7 +100,6 @@
             </div>
         </nav>
 
-
         <!-- One global hero section -->
         <div class="hero-section">
             {% block hero_content %}{% endblock %}
@@ -123,7 +125,7 @@
                 <a href="{% url 'portfolio:contact' %}" class="icon-link {% if page == 'contact' %}active{% endif %}">
                     <img src="{% static 'images/dymo-contact.jpg' %}" alt="Contact label" class="nav-img mt-0 mb-4">
                 </a>
-                {% if about %}
+                {% if about and about.linkedin_link and about.github_link %}
                     <a href="{{ about.linkedin_link }}" class="links px-4" target="_blank">LinkedIn</a>
                     <a href="{{ about.github_link }}" class="links px-4" target="_blank">GitHub</a>
                 {% endif %}

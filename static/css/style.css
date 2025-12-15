@@ -69,7 +69,7 @@ main {
     padding: 1rem 0;
 }
 .navbar .container-fluid {
-    padding: 0 1rem;
+    padding: 1rem;
 }
 .navbar .row {
     align-items: flex-start !important;
@@ -81,8 +81,6 @@ main {
 }
 .ax-brand-logo {
     display: flex;
-    /*align-items: center;*/
-    /*margin-right: auto;*/
 }
 .ax-logo-img {
     height: 60px;
@@ -93,6 +91,7 @@ main {
     width: auto;
     transition: transform 0.3s ease;
     transform-origin: center center;
+    height: 1.8rem;
 }
 .navbar-icons a:nth-child(1) .nav-img {
     transform: rotate(-2deg);
@@ -308,9 +307,6 @@ main {
         justify-content: space-between;
         width: 100%;
     }
-    .nav-img {
-        height: 1.8rem;
-    }
     .icons-col {
         flex-grow: 1 !important;
         width: 100%;
@@ -337,18 +333,12 @@ main {
 /* On larger screens */
 @media (min-width: 1024px) {
     .navbar-icons {
-        gap: 4rem;
-    }
-    .nav-img {
-        height: 2.4rem;
+        gap: 3.4rem;
     }
 }
 /* On extra large screens and above */
 @media (min-width: 1440px) {
     .navbar-icons {
-        gap: 4.5rem;
-    }
-    .nav-img {
-        height: 2.8rem;
+        gap: 3.8rem;
     }
 }
