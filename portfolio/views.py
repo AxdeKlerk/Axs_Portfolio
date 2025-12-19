@@ -7,6 +7,7 @@ from django.http import FileResponse, Http404
 import mimetypes
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -24,7 +25,11 @@ def projects(request):
 
 
 def blog_list(request):
-    blogs = Blog.objects.all().order_by('-published_date')
+    posts = Blog.objects.all().order_by('-published_date')
+    paginator = Paginator(posts, 3)
+    page_number = request.GET.get('page')
+    blogs = paginator.get_page(page_number)
+    
     return render(request, 'portfolio/blog.html', {'page': 'blog', 'blogs': blogs })
 
 

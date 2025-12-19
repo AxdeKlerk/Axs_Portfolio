@@ -62,6 +62,30 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Blog pagination">
+                <ul class="pagination">
+
+                    {% if blogs.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link btn-pag" href="?page={{ blogs.previous_page_number }}">
+                                ← Previous
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if blogs.has_next %}
+                        <li class="page-item">
+                            <a class="page-link btn-pag" href="?page={{ blogs.next_page_number }}">
+                                Next →
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
     </div>
   </div>
 
