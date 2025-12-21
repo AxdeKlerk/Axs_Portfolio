@@ -37,16 +37,23 @@ A personal developer portfolio built with Django, designed to showcase my coding
     - [4.4 Branding](#44-branding)
     - [4.5 Testing](#45-testing)
   - [5. Future Enhancements](#5-future-enhancements)
-  - [6. Getting Started](#6-getting-started)
+  - [6. Deployment (Heroku)](#6-deployment-heroku)
     - [6.1 Clone the Repository](#61-clone-the-repository)
-    - [6.2 Install Dependencies](#62-install-dependencies)
-    - [6.3 Run the Server](#63-run-the-server)
-  - [6.4 Deployment (Render)](#64-deployment-render)
-    - [6.4.1 Pre-Deployment Setup](#641-pre-deployment-setup)
-    - [6.4.2 Render Configuration](#642-render-configuration)
-    - [6.4.3 Deployment Steps](#643-deployment-steps)
-    - [6.4.4 Post-Deployment Verification](#644-post-deployment-verification)
-    - [6.4.5 Summary](#645-summary)
+    - [6.2 Clone the Repository to VS Code](#62-clone-the-repository-to-vs-code)
+    - [6.3 Create and Activate a Virtual Environment](#63-create-and-activate-a-virtual-environment)
+  - [6.4 Install Project Dependencies](#64-install-project-dependencies)
+    - [6.5 Prepare the Project for Heroku](#65-prepare-the-project-for-heroku)
+    - [6.6 Set Up a Heroku Account and CLI](#66-set-up-a-heroku-account-and-cli)
+    - [6.7 Create a Heroku App](#67-create-a-heroku-app)
+    - [6.8 Configure Environment Variables on Heroku](#68-configure-environment-variables-on-heroku)
+    - [6.9 Configure a Custom Domain on Heroku](#69-configure-a-custom-domain-on-heroku)
+      - [6.9.1 Update DNS Records at the Domain Provider](#691-update-dns-records-at-the-domain-provider)
+      - [6.9.2 Verify Domain Configuration](#692-verify-domain-configuration)
+      - [6.9.3 Enable HTTPS (Automatic)](#693-enable-https-automatic)
+    - [6.10 Push the Project to Heroku](#610-push-the-project-to-heroku)
+    - [6.11 Final Project Setup on Heroku](#611-final-project-setup-on-heroku)
+    - [6.11 Open the Live Site](#611-open-the-live-site)
+    - [6.12 Summary](#612-summary)
   - [7. Credits and Acknowledgements](#7-credits-and-acknowledgements)
     - [7.1 Credits](#71-credits)
     - [7.2 Acknowledgements](#72-acknowledgements)
@@ -200,93 +207,127 @@ Planned improvements include:
 
 ---
 
-## 6. Getting Started
+## 6. Deployment (Heroku)
 
-This section outlines how to set up Ax’s Portfolio for local development, installation, and deployment testing.
+This section outlines the full process for deploying Ax’s Portfolio from GitHub to a local development environment using VS Code, and then hosting the application live on Heroku with a production PostgreSQL database provided by Neon.
 
 ### 6.1 Clone the Repository
 
-To clone this project from GitHub, run:
+- Navigate to GitHub and click the “+” icon to create a new repository
+- Enter a repository name and optional description
+- Choose Public or Private
+- Do not initialise with a README, .gitignore, or license
+- Click Create repository
 
-`git clone https://github.com/AxDeKlerk/axs-portfolio.git`
+### 6.2 Clone the Repository to VS Code
 
-### 6.2 Install Dependencies
+- Open VS Code and access the integrated terminal
+- Navigate to the directory where the project will live
+- Copy the repository URL from GitHub
+- Use Clone Git Repository in VS Code or clone via terminal
+- Open the cloned project folder in VS Code
 
-Once cloned, install the required Python packages using:
+### 6.3 Create and Activate a Virtual Environment
 
-`pip install -r requirements.txt`
+- Create a virtual environment inside the project root
+- Activate the environment according to your operating system
+- Confirm activation by checking that the environment name appears in the terminal prompt
+- This isolates project dependencies and prevents conflicts with system-wide packages.
 
-This installs all necessary dependencies, including Django and the supporting libraries required for development and deployment.
+## 6.4 Install Project Dependencies
 
-### 6.3 Run the Server
+- Install all required packages using the requirements.txt file
+- Key dependencies include:
+- Django – Backend web framework
+- Gunicorn – WSGI server required by Heroku
+- dj-database-url – Parses the database URL into Django settings
+- psycopg2-binary – PostgreSQL database adapter
+- WhiteNoise – Static file handling in production
+- If requirements.txt does not yet exist, install dependencies manually and generate it before continuing.
 
-To start the Django development server:
+### 6.5 Prepare the Project for Heroku
 
-`python manage.py runserver`
+- Create a Procfile at the project root containing: `web: gunicorn config.wsgi`
+- Ensure gunicorn, dj-database-url, and psycopg2-binary are installed
+- Confirm static file settings and WhiteNoise configuration
+- Commit all changes to GitHub
 
-The site will be accessible at:
+### 6.6 Set Up a Heroku Account and CLI
 
-`http://127.0.0.1:8000/`
+- Create an account at Heroku.com
+- Download and install the Heroku CLI for your operating system
+- Log in via the CLI to authenticate your local environment
 
----
+### 6.7 Create a Heroku App
 
-## 6.4 Deployment (Render)
+- Use the Heroku CLI or dashboard to create a new app
+- Assign a unique app name
+- Heroku will automatically generate a remote Git endpoint
 
-Ax’s Portfolio is deployed on **Render**, using SQLite for local development and PostgreSQL for production. Deployment has been intentionally streamlined due to the lightweight nature of this project.
+### 6.8 Configure Environment Variables on Heroku
 
-### 6.4.1 Pre-Deployment Setup
+- Open the app in the Heroku Dashboard
+- Navigate to Settings → Reveal Config Vars
+- Add the following environment variables:
+- DEBUG = False
+- SECRET_KEY = Django secret key
+- DATABASE_URL = Neon PostgreSQL connection string
+- ALLOWED_HOSTS = Heroku app domain
+- CSRF_TRUSTED_ORIGINS = Heroku app URL
+- Sensitive values are stored securely and are not committed to version control.
 
-Before deploying, the following steps were completed:
+### 6.9 Configure a Custom Domain on Heroku
 
-- Installed all dependencies listed in `requirements.txt`  
-- Created separate development and production settings files  
-- Enabled WhiteNoise for production static file handling  
-- Created a `build.sh` script for Render  
-- Configured `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS`  
-- Verified static and media file paths  
+This project is configured to use a custom domain (axdeklerk.co.uk) instead of the default Heroku subdomain.
 
-### 6.4.2 Render Configuration
+- Add the Custom Domain in Heroku
+- Open the application in the Heroku Dashboard
+- Navigate to Settings → Domains
+- Click Add domain
+- Enter the custom domain: `axdeklerk.co.uk`
+- Heroku will generate a DNS target (DNS record value)
 
-Render was set up with the following configuration:
+#### 6.9.1 Update DNS Records at the Domain Provider
 
-- **Service Type:** Web Service  
-- **Environment:** Python 3  
-- **Build Command:** `pip install -r requirements.txt`  
-- **Start Command:** `gunicorn config.wsgi`  
-- **Database:** Render PostgreSQL instance  
+- Log in to the domain registrar or DNS provider managing axdeklerk.co.uk
+- Create or update a CNAME or ALIAS/ANAME record (depending on provider support)
+- Point the domain to the DNS target provided by Heroku
+- Remove any conflicting A records that may override the custom domain
+- DNS propagation may take several minutes to several hours to complete.
 
-**Environment Variables:**
-- `SECRET_KEY`  
-- `DATABASE_URL`  
-- `DEBUG=False`  
-- `ALLOWED_HOSTS`  
-- `CSRF_TRUSTED_ORIGINS`  
+#### 6.9.2 Verify Domain Configuration
 
-### 6.4.3 Deployment Steps
+- Return to the Heroku Domains section
+- Confirm the custom domain shows as active
+- Visit [https://axdeklerk.co.uk](https://axdeklerk.co.uk) in a browser to verify successful routing
 
-1. Pushed project code to GitHub  
-2. Connected the Render service to the GitHub repository  
-3. Triggered the first automated deployment  
-4. Ran database migrations using Render Shell (`python manage.py migrate`)  
-5. Created a Django superuser (`python manage.py createsuperuser`)  
-6. Verified static files were collected correctly  
-7. Performed full smoke-testing with `DEBUG=False`  
+#### 6.9.3 Enable HTTPS (Automatic)
 
-### 6.4.4 Post-Deployment Verification
+- Heroku automatically provisions SSL certificates for verified custom domains
+- HTTPS is enabled once DNS propagation completes
+- No manual certificate configuration is required
 
-After deployment, the following checks were successfully completed:
+### 6.10 Push the Project to Heroku
 
-- Navbar and routing functional across all pages  
-- Blog detail pages load correctly using slugs  
-- Static files (CSS and images) load with no debug mode issues  
-- Contact form functions correctly in production  
-- CV files download correctly (PDF and DOC)  
-- External footer links operate as expected  
-- Admin panel accessible with correct credentials  
+- Ensure the Heroku remote is connected to the local repository
+- Push the project code to Heroku
+- Heroku will automatically install dependencies and build the application
 
-### 6.4.5 Summary
+### 6.11 Final Project Setup on Heroku
 
-Deployment to Render was smooth and stable. With WhiteNoise managing static files and PostgreSQL serving production data, the site performs reliably with `DEBUG=False` and demonstrates consistent behaviour in a live environment.
+- Run database migrations using the Heroku CLI
+- Create a Django superuser for admin access
+- Confirm static files are collected and served correctly
+- Verify the site loads correctly via the custom domain
+
+### 6.11 Open the Live Site
+
+- Open the deployed application using: `https://axdeklerk.co.uk`
+- Confirm navigation, static assets, and database-backed content load correctly
+
+### 6.12 Summary
+
+Deployment was successful, with the application running stably under a custom domain using DEBUG=False. HTTPS is enabled, static files are served correctly, and the site behaves consistently in production.
 
 ---
 
@@ -296,19 +337,45 @@ Deployment to Render was smooth and stable. With WhiteNoise managing static file
 
 This project was created independently but draws on the support and documentation of the following resources:
 
-- Django documentation  
-- Bootstrap documentation  
-- VS Code  
-- Render documentation  
-- W3Schools  
-- Stack Overflow  
-- ChatGPT (for debugging assistance and conceptual clarity)
+- [Adobe Express](https://new.express.adobe.com/?xProduct=&xProductLocation=&locale=en-US) for the logo creation
+- [AI Image Upscaler](https://imgupscaler.com/) - for upscaling the About image for better quality
+- [Balsamic](https://balsamiq.com/) for the wireframes
+- [BootStrap](https://simple.wikipedia.org/wiki/Bootstrap_(front-end_framework)) - used for the layout and styling of the website
+- [Bootstrap Docs](https://getbootstrap.com/) for reference to all Bootstrap syntax
+- [Chat-GPT](https://chatgpt.com/) - An AI tool used for understanding where things went wrong, how to fix code and generally used for deeper understanding of software development and the principles and languages used for coding
+- [coolors.co](https://coolors.co/) for the colour palette
+- [CSS](https://en.wikipedia.org/wiki/CSS) - used for main content styling
+- [Django](https://simple.wikipedia.org/wiki/Django_(web_framework)) - used for the backend of the website
+- [draw.io](https://app.diagrams.net/) for the ERD
+- [Ecotrust](https://ecotrust-canada.github.io/markdown-toc/) - used to generate table of contents
+- [Heroku](https://id.heroku.com)
+- [GMAIL](https://mail.google.com)
+- [Google Fonts](https://fonts.google.com/) - for typography
+- [Google Images](https://images.google.co.uk/) - for the band and venue logos
+- [HTML](https://en.wikipedia.org/wiki/HTML) - used to build main site content
+- [JavaScript](https://simple.wikipedia.org/wiki/JavaScript) - used for all interactivity within the website
+- [JSHint](https://jshint.com/) for Javascript validation
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview) - for the performance and accessibility testing
+- [Loom](https://www.loom.com) - for responsive video
+- [MSWord](https://www.microsoft.com/en-us/microsoft-365/word) - used for grammar and spelling checking
+- [Neon](https://neon.com/) - for a Postgres database platform
+- [Perplexity](https://www.perplexity.ai/) - An AI tool used for general queries and learning
+- [Python](https://simple.wikipedia.org/wiki/Python_(programming_language)) - used for the backend of the website
+- [Short Pixel](https://shortpixel.com/) - for image optimisations
+- [Slack Edit](https://stackedit.io/) - for markdown references
+- [Slack Overflow](https://stackoverflow.com/questions) - for general queries
+- [TinyWow](https://tinywow.com) Image Compressor
+- [W3schools](https://www.w3schools.com/) a constant source of reference for all html, CSS, JavaScript, BootStrap and Django explanations
+- [W3C Markup Validation Service](https://validator.w3.org/) for the html validation
+- [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) for the CSS validation
+- [VC Code](https://code.visualstudio.com/)
 
 ### 7.2 Acknowledgements
 
 Special thanks to:
 
+- **Richard Wells** - Code Institute Mentor for his continued support even after I completed the course
 - **Julia** — for constant support  
-- **Friends** — for honest and constructive feedback  
-- **Barry** — for ensuring I take breaks and maintain balance  
+- **Friends & Family** —  *Julie*, *Paul*, *Thambiso*, *Matthew* & *Elaine* - thank you for your, sometimes brutal, honesty and constructive feedback  
+- **Barry** — (my dog) for ensuring I take breaks and maintain balance  
 
