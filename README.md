@@ -55,9 +55,12 @@ A personal developer portfolio built with Django, designed to showcase my coding
     - [8.11 Final Project Setup on Heroku](#811-final-project-setup-on-heroku)
     - [8.12 Open the Live Site](#812-open-the-live-site)
     - [8.13 Summary](#813-summary)
-  - [9. Credits and Acknowledgements](#9-credits-and-acknowledgements)
-    - [9.1 Credits](#91-credits)
-    - [9.2 Acknowledgements](#92-acknowledgements)
+  - [9. Performance Optimisation](#9-performance-optimisation)
+    - [9.1 CSS Optimisation](#91-css-optimisation)
+    - [9.2 Image Optimisation](#92-image-optimisation)
+  - [10. Credits and Acknowledgements](#10-credits-and-acknowledgements)
+    - [10.1 Credits](#101-credits)
+    - [10.2 Acknowledgements](#102-acknowledgements)
 
 ---
 
@@ -333,9 +336,31 @@ Deployment was successful, with the application running stably under a custom do
 
 ---
 
-## 9. Credits and Acknowledgements
+## 9. Performance Optimisation
 
-### 9.1 Credits
+These optimisations focus on improving real-world performance while keeping the project simple, maintainable, and aligned with its portfolio scope.
+
+### 9.1 CSS Optimisation
+
+To improve performance in production, **CSS** files were manually minified using an online [CSS minification tool](https://www.toptal.com/developers/cssminifier). This process removes unnecessary whitespace and comments, reducing file size while preserving styling behaviour.
+
+- Original readable CSS files were retained for development
+- Minified CSS is served in production
+- No build tools or preprocessors were required
+
+### 9.2 Image Optimisation
+
+Images used throughout the site were optimised to reduce file size and improve load performance in production. Compression was applied without altering image dimensions or visual quality.
+
+- Images were compressed using online image optimisation tools
+- Original filenames and paths were preserved to avoid broken references
+- Optimised images reduce bandwidth usage and improve page load times
+
+---
+
+## 10. Credits and Acknowledgements
+
+### 10.1 Credits
 
 This project was created independently but draws on the support and documentation of the following resources:
 
@@ -367,12 +392,13 @@ This project was created independently but draws on the support and documentatio
 - [Slack Edit](https://stackedit.io/) - for markdown references
 - [Slack Overflow](https://stackoverflow.com/questions) - for general queries
 - [TinyWow](https://tinywow.com) Image Compressor
+- [Toptal](https://www.toptal.com/developers/cssminifier)
 - [W3schools](https://www.w3schools.com/) a constant source of reference for all html, CSS, JavaScript, BootStrap and Django explanations
 - [W3C Markup Validation Service](https://validator.w3.org/) for the html validation
 - [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) for the CSS validation
 - [VC Code](https://code.visualstudio.com/)
 
-### 9.2 Acknowledgements
+### 10.2 Acknowledgements
 
 Special thanks to:
 
