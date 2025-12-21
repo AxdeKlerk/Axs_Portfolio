@@ -34,29 +34,30 @@ A personal developer portfolio built with Django, designed to showcase my coding
       - [4.2.5 CV Page](#425-cv-page)
       - [4.2.6 Contact Page](#426-contact-page)
     - [4.3 Agile Methodology](#43-agile-methodology)
-    - [4.4 Branding](#44-branding)
-    - [4.5 Testing](#45-testing)
-  - [5. Future Enhancements](#5-future-enhancements)
-  - [6. Deployment (Heroku)](#6-deployment-heroku)
-    - [6.1 Clone the Repository](#61-clone-the-repository)
-    - [6.2 Clone the Repository to VS Code](#62-clone-the-repository-to-vs-code)
-    - [6.3 Create and Activate a Virtual Environment](#63-create-and-activate-a-virtual-environment)
-  - [6.4 Install Project Dependencies](#64-install-project-dependencies)
-    - [6.5 Prepare the Project for Heroku](#65-prepare-the-project-for-heroku)
-    - [6.6 Set Up a Heroku Account and CLI](#66-set-up-a-heroku-account-and-cli)
-    - [6.7 Create a Heroku App](#67-create-a-heroku-app)
-    - [6.8 Configure Environment Variables on Heroku](#68-configure-environment-variables-on-heroku)
-    - [6.9 Configure a Custom Domain on Heroku](#69-configure-a-custom-domain-on-heroku)
-      - [6.9.1 Update DNS Records at the Domain Provider](#691-update-dns-records-at-the-domain-provider)
-      - [6.9.2 Verify Domain Configuration](#692-verify-domain-configuration)
-      - [6.9.3 Enable HTTPS (Automatic)](#693-enable-https-automatic)
-    - [6.10 Push the Project to Heroku](#610-push-the-project-to-heroku)
-    - [6.11 Final Project Setup on Heroku](#611-final-project-setup-on-heroku)
-    - [6.11 Open the Live Site](#611-open-the-live-site)
-    - [6.12 Summary](#612-summary)
-  - [7. Credits and Acknowledgements](#7-credits-and-acknowledgements)
-    - [7.1 Credits](#71-credits)
-    - [7.2 Acknowledgements](#72-acknowledgements)
+      - [4.4 Summary](#44-summary)
+    - [5 Debugging](#5-debugging)
+    - [6 Testing](#6-testing)
+  - [7. Future Enhancements](#7-future-enhancements)
+  - [8. Deployment (Heroku)](#8-deployment-heroku)
+    - [8.1 Clone the Repository](#81-clone-the-repository)
+    - [8.2 Clone the Repository to VS Code](#82-clone-the-repository-to-vs-code)
+    - [8.3 Create and Activate a Virtual Environment](#83-create-and-activate-a-virtual-environment)
+  - [8.4 Install Project Dependencies](#84-install-project-dependencies)
+    - [8.5 Prepare the Project for Heroku](#85-prepare-the-project-for-heroku)
+    - [8.6 Set Up a Heroku Account and CLI](#86-set-up-a-heroku-account-and-cli)
+    - [8.7 Create a Heroku App](#87-create-a-heroku-app)
+    - [8.8 Configure Environment Variables on Heroku](#88-configure-environment-variables-on-heroku)
+    - [8.9 Configure a Custom Domain on Heroku](#89-configure-a-custom-domain-on-heroku)
+      - [8.9.1 Update DNS Records at the Domain Provider](#891-update-dns-records-at-the-domain-provider)
+      - [8.9.2 Verify Domain Configuration](#892-verify-domain-configuration)
+      - [8.9.3 Enable HTTPS (Automatic)](#893-enable-https-automatic)
+    - [8.10 Push the Project to Heroku](#810-push-the-project-to-heroku)
+    - [8.11 Final Project Setup on Heroku](#811-final-project-setup-on-heroku)
+    - [8.12 Open the Live Site](#812-open-the-live-site)
+    - [8.13 Summary](#813-summary)
+  - [9. Credits and Acknowledgements](#9-credits-and-acknowledgements)
+    - [9.1 Credits](#91-credits)
+    - [9.2 Acknowledgements](#92-acknowledgements)
 
 ---
 
@@ -183,35 +184,36 @@ As a **visitor**, I want to **easily get in touch**, so that **I can contact Ax 
 
 ---
 
-### 4.4 Branding
+#### 4.4 Summary
 
-*(…your full Branding section here — unchanged…)*
+All features across the site were designed with simplicity, speed, and responsive behaviour in mind. Every page follows a consistent visual theme, ensuring a cohesive experience on any device. The combination of **Bootstrap**’s responsive utilities and **Django**’s backend logic keeps the site clean, efficient, and scalable for future upgrades.  
 
----
+### 5 Debugging
 
-### 4.5 Testing
-
-*(…your full Testing section here — unchanged…)*
+Please refer to the debugging documentation for detailed descriptions of all bugs found, fixed and learned from. It can be found here: [DEBUGGING.md](DEBUGGING.md)
 
 ---
 
-## 5. Future Enhancements
+### 6 Testing
+
+Please refer to the testing documentation for detailed descriptions of the tests completed found here: [TESTING.md](TESTING.md)
+
+---
+
+## 7. Future Enhancements
 
 Planned improvements include:
 
 - Embedded voice-recorded “About Me” section  
-- Improved UI components and layout refinements  
-- Expanded blog system with categories  
-- Interactive project timelines  
-- Portfolio gallery for future work  
+ 
 
 ---
 
-## 6. Deployment (Heroku)
+## 8. Deployment (Heroku)
 
 This section outlines the full process for deploying Ax’s Portfolio from GitHub to a local development environment using VS Code, and then hosting the application live on Heroku with a production PostgreSQL database provided by Neon.
 
-### 6.1 Clone the Repository
+### 8.1 Clone the Repository
 
 - Navigate to GitHub and click the “+” icon to create a new repository
 - Enter a repository name and optional description
@@ -219,7 +221,7 @@ This section outlines the full process for deploying Ax’s Portfolio from GitHu
 - Do not initialise with a README, .gitignore, or license
 - Click Create repository
 
-### 6.2 Clone the Repository to VS Code
+### 8.2 Clone the Repository to VS Code
 
 - Open VS Code and access the integrated terminal
 - Navigate to the directory where the project will live
@@ -227,14 +229,14 @@ This section outlines the full process for deploying Ax’s Portfolio from GitHu
 - Use Clone Git Repository in VS Code or clone via terminal
 - Open the cloned project folder in VS Code
 
-### 6.3 Create and Activate a Virtual Environment
+### 8.3 Create and Activate a Virtual Environment
 
 - Create a virtual environment inside the project root
 - Activate the environment according to your operating system
 - Confirm activation by checking that the environment name appears in the terminal prompt
 - This isolates project dependencies and prevents conflicts with system-wide packages.
 
-## 6.4 Install Project Dependencies
+## 8.4 Install Project Dependencies
 
 - Install all required packages using the requirements.txt file
 - Key dependencies include:
@@ -245,26 +247,26 @@ This section outlines the full process for deploying Ax’s Portfolio from GitHu
 - WhiteNoise – Static file handling in production
 - If requirements.txt does not yet exist, install dependencies manually and generate it before continuing.
 
-### 6.5 Prepare the Project for Heroku
+### 8.5 Prepare the Project for Heroku
 
 - Create a Procfile at the project root containing: `web: gunicorn config.wsgi`
 - Ensure gunicorn, dj-database-url, and psycopg2-binary are installed
 - Confirm static file settings and WhiteNoise configuration
 - Commit all changes to GitHub
 
-### 6.6 Set Up a Heroku Account and CLI
+### 8.6 Set Up a Heroku Account and CLI
 
 - Create an account at Heroku.com
 - Download and install the Heroku CLI for your operating system
 - Log in via the CLI to authenticate your local environment
 
-### 6.7 Create a Heroku App
+### 8.7 Create a Heroku App
 
 - Use the Heroku CLI or dashboard to create a new app
 - Assign a unique app name
 - Heroku will automatically generate a remote Git endpoint
 
-### 6.8 Configure Environment Variables on Heroku
+### 8.8 Configure Environment Variables on Heroku
 
 - Open the app in the Heroku Dashboard
 - Navigate to Settings → Reveal Config Vars
@@ -276,7 +278,7 @@ This section outlines the full process for deploying Ax’s Portfolio from GitHu
 - CSRF_TRUSTED_ORIGINS = Heroku app URL
 - Sensitive values are stored securely and are not committed to version control.
 
-### 6.9 Configure a Custom Domain on Heroku
+### 8.9 Configure a Custom Domain on Heroku
 
 This project is configured to use a custom domain (axdeklerk.co.uk) instead of the default Heroku subdomain.
 
@@ -287,7 +289,7 @@ This project is configured to use a custom domain (axdeklerk.co.uk) instead of t
 - Enter the custom domain: `axdeklerk.co.uk`
 - Heroku will generate a DNS target (DNS record value)
 
-#### 6.9.1 Update DNS Records at the Domain Provider
+#### 8.9.1 Update DNS Records at the Domain Provider
 
 - Log in to the domain registrar or DNS provider managing axdeklerk.co.uk
 - Create or update a CNAME or ALIAS/ANAME record (depending on provider support)
@@ -295,45 +297,45 @@ This project is configured to use a custom domain (axdeklerk.co.uk) instead of t
 - Remove any conflicting A records that may override the custom domain
 - DNS propagation may take several minutes to several hours to complete.
 
-#### 6.9.2 Verify Domain Configuration
+#### 8.9.2 Verify Domain Configuration
 
 - Return to the Heroku Domains section
 - Confirm the custom domain shows as active
 - Visit [https://axdeklerk.co.uk](https://axdeklerk.co.uk) in a browser to verify successful routing
 
-#### 6.9.3 Enable HTTPS (Automatic)
+#### 8.9.3 Enable HTTPS (Automatic)
 
 - Heroku automatically provisions SSL certificates for verified custom domains
 - HTTPS is enabled once DNS propagation completes
 - No manual certificate configuration is required
 
-### 6.10 Push the Project to Heroku
+### 8.10 Push the Project to Heroku
 
 - Ensure the Heroku remote is connected to the local repository
 - Push the project code to Heroku
 - Heroku will automatically install dependencies and build the application
 
-### 6.11 Final Project Setup on Heroku
+### 8.11 Final Project Setup on Heroku
 
 - Run database migrations using the Heroku CLI
 - Create a Django superuser for admin access
 - Confirm static files are collected and served correctly
 - Verify the site loads correctly via the custom domain
 
-### 6.11 Open the Live Site
+### 8.12 Open the Live Site
 
 - Open the deployed application using: `https://axdeklerk.co.uk`
 - Confirm navigation, static assets, and database-backed content load correctly
 
-### 6.12 Summary
+### 8.13 Summary
 
 Deployment was successful, with the application running stably under a custom domain using DEBUG=False. HTTPS is enabled, static files are served correctly, and the site behaves consistently in production.
 
 ---
 
-## 7. Credits and Acknowledgements
+## 9. Credits and Acknowledgements
 
-### 7.1 Credits
+### 9.1 Credits
 
 This project was created independently but draws on the support and documentation of the following resources:
 
@@ -370,7 +372,7 @@ This project was created independently but draws on the support and documentatio
 - [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) for the CSS validation
 - [VC Code](https://code.visualstudio.com/)
 
-### 7.2 Acknowledgements
+### 9.2 Acknowledgements
 
 Special thanks to:
 
