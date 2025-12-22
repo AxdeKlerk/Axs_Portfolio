@@ -58,7 +58,7 @@
         <div class="col-lg-8">
             <div class="card blog-detail-card blog-text">
                 {% if blog.blog_image %}
-                <img src="{{ blog.blog_image.secure_url }}" class="blog-detail-img img-fluid" alt="{{ blog.title }}">
+                <img src="{{ blog.blog_image.url }}" class="blog-detail-img img-fluid" alt="{{ blog.title }}">
                 {% endif %}
                 <div class="card-body">
                     <h1 class="card-title mb-3">{{ blog.title }}</h1>

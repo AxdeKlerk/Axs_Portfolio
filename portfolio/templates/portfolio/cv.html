@@ -46,7 +46,7 @@
             <div class="card cv-card">
                 <div class="cv-card-body d-flex flex-column">
                     {% if cv.cv_image_page_1 %}
-                        <img src="{{ cv.cv_image_page_1.secure_url }}" 
+                        <img src="{{ cv.cv_image_page_1.url }}" 
                              class="card-img-top img-fluid cv-img" 
                              alt="cv page 1">
                     {% endif %}
@@ -61,7 +61,7 @@
             <div class="card cv-card">
                 <div class="cv-card-body d-flex flex-column">
                     {% if cv.cv_image_page_2 %}
-                        <img src="{{ cv.cv_image_page_2.secure_url }}" 
+                        <img src="{{ cv.cv_image_page_2.url }}" 
                              class="card-img-top img-fluid cv-img" 
                              alt="cv page 2">
                     {% endif %}
