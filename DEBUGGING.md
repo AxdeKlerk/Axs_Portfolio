@@ -797,3 +797,30 @@ All favicon links, PWA links, and icon references worked instantly.
 **Lesson Learned:**  
 Never use blanket patterns like `*.json` in `.gitignore`. They silently prevent critical project files from being tracked, especially when working with **Django** static assets, PWA manifests, configuration files, and front-end build outputs. If a `JSON` file is missing on **Heroku**, check `.gitignore` before checking your static pipeline. This bug looked like a staticfiles problem, but the real cause was Git refusing to track a required file.
 
+## Mixed Content / HTTPS Error
+
+**Bug:**  
+After deploying the site to **Heroku**, Lighthouse reported a `Does not use HTTPS` warning on the About page. The browser console showed mixed content warnings where pages loaded over `HTTPS` were requesting images from **Cloudinary** using `http://` URLs.  
+Although the browser automatically upgraded these requests to `HTTPS` and images displayed correctly, **Lighthouse** still flagged this as a security issue. Clearing browser cache, re-uploading images, and confirming templates used `{{ image.url }}` did not resolve the warning.
+
+**Fix:**  
+The issue was caused by an incomplete **Cloudinary** configuration. While `CLOUDINARY_SECURE = True` was set for the **Django** storage backend, the **Cloudinary** `Python SD`K itself was still generating non-secure URLs. The fix was to explicitly force `HTTPS` at the SDK configuration level by adding `secure=True` to the `cloudinary.config()` call in the settings file.
+
+    cloudinary.config(
+        cloud_name=env("CLOUD_NAME"),
+        api_key=env("CLOUD_API_KEY"),
+        api_secret=env("CLOUD_API_SECRET"),
+        secure=True,
+    )
+
+    CLOUDINARY_SECURE = True
+
+After committing the change to **Github** and redeploying to **Heroku**, **Lighthouse** no longer detected insecure requests. The Best Practices score returned to 100, and all mixed content warnings were resolved.
+
+**Lesson Learned:**  
+Using **Cloudinary** with **Django** requires configuring `HTTPS` at two levels: the storage backend and the `Cloudinary SDK` itself. Relying on browser auto-upgrades or `CLOUDINARY_SECURE` alone is not sufficient for **Lighthouse** compliance. Security-related warnings should be fixed at the source of `URL` generation, not masked at the template or browser level.
+
+
+
+
+
