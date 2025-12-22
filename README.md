@@ -355,7 +355,6 @@ Images used throughout the site were optimised to reduce file size and improve l
 - Images were compressed using online image optimisation tools
 - Original filenames and paths were preserved to avoid broken references
 - Optimised images reduce bandwidth usage and improve page load times
-- Media assets are served securely via Cloudinary over HTTPS in production.
 
 ---
 
