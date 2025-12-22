@@ -34,6 +34,7 @@ cloudinary.config(
     api_key=env("CLOUD_API_KEY"),
     api_secret=env("CLOUD_API_SECRET"),
 )
+CLOUDINARY_SECURE = True
 
 # Email configuration
 EMAIL_HOST = env("EMAIL_HOST")

@@ -355,6 +355,7 @@ Images used throughout the site were optimised to reduce file size and improve l
 - Images were compressed using online image optimisation tools
 - Original filenames and paths were preserved to avoid broken references
 - Optimised images reduce bandwidth usage and improve page load times
+- Media assets are served securely via Cloudinary over HTTPS in production.
 
 ---
 
@@ -392,7 +393,7 @@ This project was created independently but draws on the support and documentatio
 - [Slack Edit](https://stackedit.io/) - for markdown references
 - [Slack Overflow](https://stackoverflow.com/questions) - for general queries
 - [TinyWow](https://tinywow.com) Image Compressor
-- [Toptal](https://www.toptal.com/developers/cssminifier)
+- [Toptal](https://www.toptal.com/developers/cssminifier) - minifier tool for compressing CSS and removing whitespace
 - [W3schools](https://www.w3schools.com/) a constant source of reference for all html, CSS, JavaScript, BootStrap and Django explanations
 - [W3C Markup Validation Service](https://validator.w3.org/) for the html validation
 - [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/) for the CSS validation
