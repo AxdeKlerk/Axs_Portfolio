@@ -20,7 +20,12 @@ def about(request):
 
 
 def projects(request):
-    projects = Project.objects.all().order_by('-submission_date')
+    project_list = Project.objects.all().order_by('-submission_date')
+    paginator = Paginator(project_list, 3)
+
+    page_number = request.GET.get('page')
+    projects = paginator.get_page(page_number)
+
     return render(request, 'portfolio/projects.html', {'page': 'project', 'projects' : projects})
 
 

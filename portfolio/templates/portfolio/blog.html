@@ -39,9 +39,9 @@
 {% block content %}
 
 <div class="container justify-contents-center">
-    <div class="row">
+    <div class="row blog-list">
         {% for blog in blogs %}
-        <div class="col-md-6 col-xl-4 mb-3">
+        <div class="col-md-6 col-lg-4 mb-3 blog-item">
             <div class="card blog-card blog-text h-100">
                 {% if blog.blog_image %}
                 <img src="{{ blog.blog_image.url }}" class="card-img-top img-fluid blog-img" alt="{{ blog.title }}">

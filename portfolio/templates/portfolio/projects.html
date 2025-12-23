@@ -39,9 +39,9 @@
 {% block content %}
 
 <div class="container justify-contents-center">
-    <div class="row">
+    <div class="row project-list">
         {% for project in projects %}
-        <div class="col-md-6 col-lg-4 mb-3">
+        <div class="col-md-6 col-lg-4 mb-3 project-item">
             <div class="card blog-card blog-text h-100">
                 {% if project.project_image %}
                 <img src="{{ project.project_image.url }}" class="card-img-top img-fluid project-img" alt="{{ project.title }}">
@@ -80,6 +80,30 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="d-flex justify-content-center mt-4">
+            <nav aria-label="Projects pagination">
+                <ul class="pagination">
+
+                    {% if projects.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link btn-pag" href="?page={{ projects.previous_page_number }}">
+                                ← More Recent
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% if projects.has_next %}
+                        <li class="page-item">
+                            <a class="page-link btn-pag" href="?page={{ projects.next_page_number }}">
+                                More →
+                            </a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 

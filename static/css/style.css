@@ -329,6 +329,25 @@ main {
         flex-grow: 1 !important;
         width: 100%;
     }
+    /* Hide 3rd card item on small screens */
+    .blog-list > .blog-item:nth-of-type(3) {
+        display: none;
+    }
+    .project-list > .project-item:nth-of-type(3) {
+        display: none;
+    }
+}
+
+/* Specifically for screen widths 425px */
+@media (min-width: 425px) {
+    .navbar-icons {
+        justify-content: center;
+    }
+    .navbar-icons .blog-icon {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /* On medium to larger screens */
@@ -345,6 +364,13 @@ main {
         display: flex;
         justify-content: center;
         flex-grow: 1 !important; /* prevents wrapping */
+    }
+    
+    /* RESET blog icon to normal behaviour */
+    .navbar-icons .blog-icon {
+        width: auto;
+        display: inline-flex;
+        justify-content: center;
     }
 }
 
