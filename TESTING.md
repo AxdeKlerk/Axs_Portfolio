@@ -122,3 +122,29 @@ I tested whether all static icon assets (*, ICO, *) and the `manifest.json` file
 
 **Notes:**  
 This issue turned out to be caused by a blanket `.gitignore` rule that ignored **every** `.json` file in the project, including the critical `manifest.json` used by browsers and *PWAs*. Although all *PNG*, *ICO*, *SVG*, and *CSS* files deployed correctly, the manifest was never tracked by *Git* and therefore never included in **Heroku**’s slug. Once I corrected the `.gitignore` entry and force-added the manifest file, `collectstatic` picked it up and the file appeared correctly under `/static/`. This was a good reminder that *Git* ignore rules can silently break production even when the **Django** static pipeline is working perfectly.
+
+
+## 9.6 Lighthouse
+
+#### 9.6.3 HTTPS and Mixed Content Validation (Lighthouse Audit)
+
+**User Story**  
+As a **site owner**, I want to **ensure all pages and assets are served securely over HTTPS**, so that **the site meets modern security standards and passes automated best-practice audits**.
+
+**What Was Tested**  
+The deployed site was tested using **Lighthouse** to verify that all pages load securely over `HTTPS` and do not request any insecure (HTTP) resources, particularly media assets served via **Cloudinary**.
+
+**Acceptance Criteria**  
+- [x] The site loads over `HTTPS` on all public pages  
+- [x] No mixed content (HTTP resources on HTTPS pages) is detected  
+- [x] **Lighthouse** does not report “Does not use HTTPS” warnings  
+- [x] Media assets load correctly without browser security warnings  
+
+**Tasks Completed**  
+- [x] Ran **Lighthouse** audit on the live site after deployment  
+- [x] Reviewed Best Practices and Security sections of the report  
+- [x] Confirmed all media requests resolve over `HTTPS`  
+- [x] Re-ran **Lighthouse** after configuration changes to confirm fix  
+
+**Notes**  
+**Lighthouse** initially flagged a mixed content issue where image assets served from **Cloudinary** were generated as `HTTP URL`s and automatically upgraded by the browser. After updating the **Cloudinary** configuration to explicitly enforce secure `URL` generation and redeploying to **Heroku**, the issue was resolved. A subsequent **Lighthouse** audit confirmed that no insecure requests remained and the Best Practices score returned to 100.
