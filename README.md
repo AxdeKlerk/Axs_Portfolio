@@ -375,6 +375,7 @@ This project was created independently but draws on the support and documentatio
 - [Django](https://simple.wikipedia.org/wiki/Django_(web_framework)) - used for the backend of the website
 - [draw.io](https://app.diagrams.net/) for the ERD
 - [Ecotrust](https://ecotrust-canada.github.io/markdown-toc/) - used to generate table of contents
+- [Fontspace](https://www.fontspace.com/category/dymo) - used to create dymo labels for navbar
 - [Heroku](https://id.heroku.com)
 - [GMAIL](https://mail.google.com)
 - [Google Fonts](https://fonts.google.com/) - for typography

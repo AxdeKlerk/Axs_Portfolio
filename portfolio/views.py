@@ -94,3 +94,7 @@ def contact(request):
         return redirect("portfolio:contact")
 
     return render(request, "portfolio/contact.html", {"page": "contact"})
+
+
+def cicd(request):
+    return render(request, "portfolio/cicd.html")

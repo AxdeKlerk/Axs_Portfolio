@@ -77,7 +77,6 @@ main {
 .navbar-icons {
     display: flex;
     gap: 1rem;
-    padding-left: 1rem;
 }
 .ax-brand-logo {
     display: flex;
@@ -91,7 +90,7 @@ main {
     width: auto;
     transition: transform 0.3s ease;
     transform-origin: center center;
-    height: 1.8rem;
+    height: 27px;
 }
 .navbar-icons a:nth-child(1) .nav-img {
     transform: rotate(-2deg);
@@ -114,6 +113,7 @@ main {
 .icons-col {
     display: flex;
     justify-content: center;
+    padding: 0;
 }
 .icon-link {
     display: flex;
@@ -121,9 +121,6 @@ main {
     align-items: center;
     text-decoration: none;
     flex: 0 0 auto; /*prevents wrapping */
-}
-.blog-icon {
-    margin-right: 1rem;
 }
 
 /* Home page */
@@ -316,20 +313,20 @@ main {
 /* Media Queries */
 
 /* On small screens */
+@media (min-width: 375px) and (max-width: 425px) {
+    .navbar-icons {
+        gap: 1.5rem;
+    }
+}
 @media (max-width: 768px) {
     .ax-logo-img {
         height: 45px;
     }
     .navbar-icons {
         flex-wrap: wrap;
-        justify-content: space-between;
-        width: 100%;
+        justify-content: center;
+        align-items: start;
     }
-    .icons-col {
-        flex-grow: 1 !important;
-        width: 100%;
-    }
-    /* Hide 3rd card item on small screens */
     .blog-list > .blog-item:nth-of-type(3) {
         display: none;
     }
@@ -338,51 +335,22 @@ main {
     }
 }
 
-/* Specifically for screen widths 425px */
-@media (min-width: 425px) {
-    .navbar-icons {
-        justify-content: center;
-    }
-    .navbar-icons .blog-icon {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-}
-
 /* On medium to larger screens */
 @media (min-width: 768px) {
     .navbar-icons {
-        width: auto;
-        flex-wrap: nowrap;
-        gap: 3rem;
-        justify-content: center;
-        align-items: center;
-        padding-top: 1rem;
-    }
-    .icons-col {
-        display: flex;
-        justify-content: center;
-        flex-grow: 1 !important; /* prevents wrapping */
-    }
-    
-    /* RESET blog icon to normal behaviour */
-    .navbar-icons .blog-icon {
-        width: auto;
-        display: inline-flex;
-        justify-content: center;
+        gap: 2.5rem;
     }
 }
 
 /* On larger screens */
 @media (min-width: 1024px) {
     .navbar-icons {
-        gap: 3.4rem;
+        gap: 3rem;
     }
 }
 /* On extra large screens and above */
 @media (min-width: 1440px) {
     .navbar-icons {
-        gap: 3.8rem;
+        gap: 3.2rem;
     }
 }

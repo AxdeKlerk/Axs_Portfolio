@@ -50,7 +50,7 @@
 
     <!-- Bootstrap and CSS links -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {% block canonical_url %}
     {% if request %}
@@ -90,6 +90,9 @@
                             </a>
                             <a href="{% url 'portfolio:projects' %}" class="icon-link {% if page == 'projects' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-projects.jpg' %}" alt="Projects label" class="nav-img">
+                            </a>
+                            <a href="{% url 'portfolio:cicd' %}" class="icon-link {% if page == 'cicd' %}active{% endif %}">
+                                <img src="{% static 'images/dymo-devops-v2.jpg' %}" alt="devops label" class="nav-img">
                             </a>
                             <a href="{% url 'portfolio:blog' %}" class="icon-link blog-icon {% if page == 'blog' %}active{% endif %}">
                                 <img src="{% static 'images/dymo-blog.jpg' %}" alt="Blog label" class="nav-img">
@@ -135,6 +138,19 @@
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: "dark",
+        themeVariables: {
+            primaryColor: "#0a0a0a",
+            primaryTextColor: "#11ED73",
+            lineColor: "#11ED73",
+            secondaryColor: "#1a1a1a"
+        }
+    });
+</script>
 </body>
 </html>
 

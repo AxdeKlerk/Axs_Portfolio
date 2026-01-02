@@ -13,4 +13,5 @@ urlpatterns = [
     path("cv/download/pdf/", views.download_cv_pdf, name="download_cv_pdf"),
     path("cv/download/doc/", views.download_cv_doc, name="download_cv_doc"),
     path('contact/', views.contact, name='contact'),
+    path('cicd/', views.cicd, name='cicd'),
 ]
